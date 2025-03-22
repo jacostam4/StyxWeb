@@ -12,18 +12,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "contacts")
+@Table(name = "usuario")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
-public class ContactModel {
+public class UsuarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long id_usuario;
 
-    private String name;
-    private String email;
-    private String password;
-
-    private Long telefono;
+    private String nombre;
+    private String correo;
+    private String telefono;
 
     @Column(nullable = false)
     private String rol;  // 'Admin' o 'Cliente'
@@ -35,4 +33,5 @@ public class ContactModel {
     private String numeroDoc;
 
     private String direccion;
+    private String contrasena;
 }
