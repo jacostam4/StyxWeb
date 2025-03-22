@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/usuario")
-public class contactController {
+public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    public contactController(UsuarioService contactService) {
+    public UsuarioController(UsuarioService contactService) {
         this.usuarioService = contactService;
     }
 
