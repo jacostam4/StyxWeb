@@ -6,14 +6,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Column;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "usuario")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Getter @Setter
 public class UsuarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,14 +21,16 @@ public class UsuarioModel {
     private String correo;
     private String telefono;
 
-    @Column(nullable = false)
-    private String rol;  // 'Admin' o 'Cliente'
+    
 
     @Column(nullable = false)
-    private String tipoDoc; // 'C.C', 'C.E', 'Pasaporte'
+    private Long id_rol;  // 'Admin' o 'Cliente'
+
+    @Column(nullable = false)
+    private String tipo_doc; // 'C.C', 'C.E', 'Pasaporte'
 
     @Column(nullable = false, unique = true)
-    private String numeroDoc;
+    private String numero_doc;
 
     private String direccion;
     private String contrasena;
