@@ -1,6 +1,6 @@
 package com.contacto.contacto.model;
 
-import jakarta.persistence.ElementCollection;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,12 +18,11 @@ public class ProductoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_producto;
 
+    private long id_categoria;
+
     private String nombre;
-    private long cantidad;
     private float costo;
     private float precio;
     private String referencia;
 
-    @ElementCollection
-    private String[] imagenes;
 }

@@ -4,9 +4,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.contacto.contacto.model.CategoriaModel;
-import com.contacto.contacto.model.ProductoModel;
+
 import com.contacto.contacto.service.CategoriaService;
-import com.contacto.contacto.service.ProductoService;
+
 
 import java.util.List;
 

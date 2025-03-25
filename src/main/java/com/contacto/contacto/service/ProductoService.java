@@ -30,10 +30,8 @@ public class ProductoService {
         return productoRepository.findById(id).map(existeProducto -> {
             existeProducto.setNombre(producto.getNombre());
             existeProducto.setPrecio(producto.getPrecio());
-            existeProducto.setReferencia(producto.getReferencia());
-            existeProducto.setCantidad(producto.getCantidad());
+            existeProducto.setReferencia(producto.getReferencia());            
             existeProducto.setCosto(producto.getCosto());
-            existeProducto.setImagenes(producto.getImagenes());
             return productoRepository.save(existeProducto);
         }).orElseThrow(() -> new RuntimeException("Producto no encontrado"));   
     }
