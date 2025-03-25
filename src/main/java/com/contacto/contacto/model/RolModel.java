@@ -1,6 +1,5 @@
 package com.contacto.contacto.model;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,19 +9,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "producto")
+@Table(name = "rol")
 @Getter @Setter
-public class ProductoModel {
+public class RolModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_producto;
-
-    private long id_categoria;
+    private long id_rol;
 
     private String nombre;
-    private float costo;
-    private float precio;
-    private String referencia;
-
 }
