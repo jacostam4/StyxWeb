@@ -1,6 +1,6 @@
 package com.contacto.contacto.controller;
 
-import com.contacto.contacto.model.UsuarioModel;
+import com.contacto.contacto.Persitencia.model.UsuarioModel;
 import com.contacto.contacto.service.UsuarioService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

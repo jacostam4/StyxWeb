@@ -1,7 +1,7 @@
 package com.contacto.contacto.service;
 
-import com.contacto.contacto.model.UsuarioModel;
-import com.contacto.contacto.repository.UsuarioRepository;
+import com.contacto.contacto.Persitencia.model.UsuarioModel;
+import com.contacto.contacto.Persitencia.repository.UsuarioRepository;
 
 import java.util.Optional;
 

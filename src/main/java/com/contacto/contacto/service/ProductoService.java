@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.contacto.contacto.model.ProductoModel;
-import com.contacto.contacto.repository.ProductoRepository;
+import com.contacto.contacto.Persitencia.model.ProductoModel;
+import com.contacto.contacto.Persitencia.repository.ProductoRepository;
 
 @Service
 public class ProductoService {

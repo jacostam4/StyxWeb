@@ -1,7 +1,9 @@
-package com.contacto.contacto.repository;
+package com.contacto.contacto.Persitencia.repository;
 
-import com.contacto.contacto.model.UsuarioModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.contacto.contacto.Persitencia.model.UsuarioModel;
+
 import java.util.Optional;
 
 public interface UsuarioRepository extends JpaRepository<UsuarioModel, Long> {

@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.contacto.contacto.model.CategoriaModel;
-import com.contacto.contacto.repository.CategoriaRepository;
+import com.contacto.contacto.Persitencia.model.CategoriaModel;
+import com.contacto.contacto.Persitencia.repository.CategoriaRepository;
 
 @Service
 public class CategoriaService {

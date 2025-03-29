@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.contacto.contacto.model.RolModel;
-import com.contacto.contacto.repository.RolRepository;
+import com.contacto.contacto.Persitencia.model.RolModel;
+import com.contacto.contacto.Persitencia.repository.RolRepository;
 
 @Service
 public class RolService {

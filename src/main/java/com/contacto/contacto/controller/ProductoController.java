@@ -3,7 +3,7 @@ package com.contacto.contacto.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.contacto.contacto.model.ProductoModel;
+import com.contacto.contacto.Persitencia.model.ProductoModel;
 import com.contacto.contacto.service.ProductoService;
 
 import java.util.List;

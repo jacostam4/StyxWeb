@@ -1,5 +1,6 @@
-package com.contacto.contacto.model;
+package com.contacto.contacto.Persitencia.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,13 +10,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "rol")
+@Table(name = "categoria")
 @Getter @Setter
-public class RolModel {
+public class CategoriaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_rol;
+    private long id_categoria;
 
+    @Column(nullable = false)
     private String nombre;
 }
