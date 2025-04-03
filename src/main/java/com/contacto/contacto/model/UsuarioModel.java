@@ -5,6 +5,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+
+
+
+
 import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,5 +38,6 @@ public class UsuarioModel {
     private String numero_doc;
 
     private String direccion;
-    private String contrasena;
+    private String contrasena;    
+
 }
