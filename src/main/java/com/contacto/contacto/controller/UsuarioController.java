@@ -2,6 +2,7 @@ package com.contacto.contacto.controller;
 
 import com.contacto.contacto.model.AuthUsuario;
 import com.contacto.contacto.model.UsuarioModel;
+import com.contacto.contacto.security.JwtUtil;
 import com.contacto.contacto.service.UsuarioService;
 
 import jakarta.annotation.PostConstruct;
@@ -9,10 +10,9 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
+
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 //import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +26,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
+    private final JwtUtil jwtUtil;
 
-    public UsuarioController(UsuarioService contactService) {
+    public UsuarioController(UsuarioService contactService, JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
         this.usuarioService = contactService;
     }
 
@@ -48,19 +50,10 @@ public class UsuarioController {
     
     @PostMapping("/auth")
     public ResponseEntity<?> auth(@RequestBody AuthUsuario authUsuario) {
-        Optional<UsuarioModel> usuario = usuarioService.findByCorreo(authUsuario.getEmail());
+        String token = usuarioService.authenticate(authUsuario.getEmail(), authUsuario.getPassword());
 
-        if (usuario.isPresent()) {
-            System.out.println("🔍 Usuario encontrado: " + usuario.get().getCorreo());
-
-            if (usuarioService.verificarPassword(authUsuario.getPassword(), usuario.get().getContrasena())) {
-                System.out.println("🔐 Contraseña correcta");
-                return ResponseEntity.ok("{\"message\": \"Authorized\"}");
-            } else {
-                System.out.println("❌ Contraseña incorrecta");
-            }
-        } else {
-            System.out.println("🚨 Usuario no encontrado");
+        if (token != null) {
+            return ResponseEntity.ok("{\"token\": \"" + token + "\"}");
         }
 
         return ResponseEntity.status(401).body("{\"message\": \"Unauthorized\"}");
