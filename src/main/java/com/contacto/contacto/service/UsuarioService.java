@@ -19,20 +19,16 @@ public class UsuarioService {
     }
 
     public UsuarioModel register(UsuarioModel usuario) {
-        System.out.println("Registrando usuario: " + usuario.getCorreo());
-        // Guardar la contraseña en texto plano (⚠️ NO recomendado para producción)
+        System.out.println("Registrando usuario: " + usuario.getCorreo());        
         usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena())); // Encriptar la contraseña
         return usuarioRepository.save(usuario);
     }
 
-    public Optional<UsuarioModel> findByCorreo(String email, String rawPassword) {
-        return usuarioRepository.findByCorreo(email)
-            .filter(usuario -> {
-                System.out.println("Contraseña en BD: " + usuario.getContrasena()); // Debug
-                System.out.println("Contraseña ingresada: " + rawPassword); // Debug
-                boolean match = passwordEncoder.matches(rawPassword, usuario.getContrasena());
-                System.out.println("¿Coincide?: " + match);
-                return match;
-            });
+    public Optional<UsuarioModel> findByCorreo(String email) {
+        return usuarioRepository.findByCorreo(email);
+    }
+
+    public boolean verificarPassword(String rawPassword, String encodedPassword) {
+        return passwordEncoder.matches(rawPassword, encodedPassword);
     }
 }

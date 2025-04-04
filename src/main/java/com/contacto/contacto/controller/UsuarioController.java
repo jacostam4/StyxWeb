@@ -1,24 +1,26 @@
 package com.contacto.contacto.controller;
 
+import com.contacto.contacto.model.AuthUsuario;
 import com.contacto.contacto.model.UsuarioModel;
 import com.contacto.contacto.service.UsuarioService;
 
 import jakarta.annotation.PostConstruct;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 //import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/usuario")
 public class UsuarioController {
@@ -45,14 +47,23 @@ public class UsuarioController {
     }
     
     @PostMapping("/auth")
-public ResponseEntity<?> auth(@RequestParam String email, @RequestParam String password) {
-    Optional<UsuarioModel> contact = usuarioService.findByCorreo(email, password);
-    
-    if (contact.isPresent()) {
-        return ResponseEntity.ok("{\"message\": \"Authorized\"}");
-    } else {
+    public ResponseEntity<?> auth(@RequestBody AuthUsuario authUsuario) {
+        Optional<UsuarioModel> usuario = usuarioService.findByCorreo(authUsuario.getEmail());
+
+        if (usuario.isPresent()) {
+            System.out.println("🔍 Usuario encontrado: " + usuario.get().getCorreo());
+
+            if (usuarioService.verificarPassword(authUsuario.getPassword(), usuario.get().getContrasena())) {
+                System.out.println("🔐 Contraseña correcta");
+                return ResponseEntity.ok("{\"message\": \"Authorized\"}");
+            } else {
+                System.out.println("❌ Contraseña incorrecta");
+            }
+        } else {
+            System.out.println("🚨 Usuario no encontrado");
+        }
+
         return ResponseEntity.status(401).body("{\"message\": \"Unauthorized\"}");
     }
-}
     
 }
