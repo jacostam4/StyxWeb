@@ -21,6 +21,10 @@ public class UsuarioService {
         this.jwtUtil = jwtUtil;
     }
 
+    public UsuarioModel findByCorreo(String correo) {
+        return usuarioRepository.findByCorreo(correo).orElse(null);
+    }
+
     public UsuarioModel register(UsuarioModel usuario) {
         System.out.println("Registrando usuario: " + usuario.getCorreo());
         usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena())); // Encriptar la contraseña
@@ -29,9 +33,9 @@ public class UsuarioService {
 
     public String authenticate(String email, String password) {
         Optional<UsuarioModel> usuario = usuarioRepository.findByCorreo(email);
-
+    
         if (usuario.isPresent() && passwordEncoder.matches(password, usuario.get().getContrasena())) {
-            return jwtUtil.generateToken(email); // Generar token JWT
+            return jwtUtil.generateToken(usuario.get()); // Ahora pasas todo el usuario
         }
         return null;
     }

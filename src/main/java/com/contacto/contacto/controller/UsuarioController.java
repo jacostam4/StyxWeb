@@ -5,18 +5,23 @@ import com.contacto.contacto.model.UsuarioModel;
 import com.contacto.contacto.security.JwtUtil;
 import com.contacto.contacto.service.UsuarioService;
 
+import io.jsonwebtoken.Claims;
 import jakarta.annotation.PostConstruct;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
 
-
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 //import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 
 
@@ -58,5 +63,23 @@ public class UsuarioController {
 
         return ResponseEntity.status(401).body("{\"message\": \"Unauthorized\"}");
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getCurrentUser(@RequestHeader("Authorization") String authHeader) {
+    try {
+        String token = authHeader.replace("Bearer ", "");
+        Claims claims = jwtUtil.parseToken(token);
+
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("idUsuario", claims.get("idUsuario", Integer.class));
+        userInfo.put("nombre", claims.get("nombre", String.class));
+        userInfo.put("correo", claims.getSubject()); // correo
+        userInfo.put("rol", claims.get("rol", Integer.class)); // o String si usas nombre
+
+        return ResponseEntity.ok(userInfo);
+    } catch (Exception e) {
+        return ResponseEntity.status(401).body("Token inválido o expirado");
+    }
+}
     
 }
