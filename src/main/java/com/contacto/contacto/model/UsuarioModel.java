@@ -5,6 +5,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+
+
+
+
 import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,23 +20,30 @@ import lombok.Setter;
 public class UsuarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id_usuario;
+    @Column(name = "id_usuario")
+    private Long idUsuario;
 
+    @Column(name = "nombre", nullable = false)
     private String nombre;
+
+    @Column(name = "correo", nullable = false, unique = true)
     private String correo;
+
+    @Column(name = "telefono")
     private String telefono;
 
-    
+    @Column(name = "id_rol", nullable = false)
+    private Long idRol;
 
-    @Column(nullable = false)
-    private Long id_rol;  // 'Admin' o 'Cliente'
+    @Column(name = "tipo_doc", nullable = false)
+    private String tipoDoc;
 
-    @Column(nullable = false)
-    private String tipo_doc; // 'C.C', 'C.E', 'Pasaporte'
+    @Column(name = "numero_doc", nullable = false, unique = true)
+    private String numeroDoc;
 
-    @Column(nullable = false, unique = true)
-    private String numero_doc;
-
+    @Column(name = "direccion", nullable = false)
     private String direccion;
+
+    @Column(name = "contrasena", nullable = false)
     private String contrasena;
 }

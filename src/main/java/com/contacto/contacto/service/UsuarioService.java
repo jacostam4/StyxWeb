@@ -2,27 +2,41 @@ package com.contacto.contacto.service;
 
 import com.contacto.contacto.model.UsuarioModel;
 import com.contacto.contacto.repository.UsuarioRepository;
+import com.contacto.contacto.security.JwtUtil;
 
 import java.util.Optional;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
-
-    // Eliminar PasswordEncoder del constructor
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    private final BCryptPasswordEncoder  passwordEncoder;
+    private final JwtUtil jwtUtil; 
+    
+    public UsuarioService(UsuarioRepository usuarioRepository, BCryptPasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
+    }
+
+    public UsuarioModel findByCorreo(String correo) {
+        return usuarioRepository.findByCorreo(correo).orElse(null);
     }
 
     public UsuarioModel register(UsuarioModel usuario) {
-        // Guardar la contraseña en texto plano (⚠️ NO recomendado para producción)
+        System.out.println("Registrando usuario: " + usuario.getCorreo());
+        usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena())); // Encriptar la contraseña
         return usuarioRepository.save(usuario);
     }
 
-    public Optional<UsuarioModel> findByCorreo(String email, String rawPassword) {
-        return usuarioRepository.findByCorreo(email)
-            .filter(usuario -> usuario.getContrasena().equals(rawPassword)); // Comparación directa (No seguro)
+    public String authenticate(String email, String password) {
+        Optional<UsuarioModel> usuario = usuarioRepository.findByCorreo(email);
+    
+        if (usuario.isPresent() && passwordEncoder.matches(password, usuario.get().getContrasena())) {
+            return jwtUtil.generateToken(usuario.get()); // Ahora pasas todo el usuario
+        }
+        return null;
     }
 }
