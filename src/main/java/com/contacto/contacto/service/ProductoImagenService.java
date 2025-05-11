@@ -8,12 +8,10 @@ import com.contacto.contacto.repository.ProductoImagenRepository;
 
 @Service
 public class ProductoImagenService {
-    private final ProductoService productoService;
     private final ProductoImagenRepository productoImagenRepository;
 
-    public ProductoImagenService(ProductoService productoService, ProductoImagenRepository productoImagenRepository) {
-        this.productoService = productoService;
-        this.productoImagenRepository = null;
+    public ProductoImagenService(ProductoService productoService, ProductoImagenRepository productoImagenRepository) {        
+        this.productoImagenRepository = productoImagenRepository;
     }
     
     //Registrar un producto
