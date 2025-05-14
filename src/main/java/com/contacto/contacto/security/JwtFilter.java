@@ -35,7 +35,7 @@ public void doFilter(ServletRequest request, ServletResponse response, FilterCha
     HttpServletRequest httpRequest = (HttpServletRequest) request;
     String path = httpRequest.getRequestURI();
 
-    if (path.equals("/api/usuario/auth") || path.equals("/api/usuario/register")) {
+    if (path.equals("/api/usuario/auth") || path.equals("/api/usuario/register") || path.startsWith("/Imagenes/")) {
         chain.doFilter(request, response);
         return;
     }
