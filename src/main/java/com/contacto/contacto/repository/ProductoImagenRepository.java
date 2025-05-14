@@ -1,12 +1,12 @@
 package com.contacto.contacto.repository;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.contacto.contacto.model.ProductoImagenModel;
 
 public interface ProductoImagenRepository  extends JpaRepository<ProductoImagenModel, Long> {
-    Optional<ProductoImagenModel> findByIdProducto(Long idProducto);    
+    List<ProductoImagenModel> findByIdProducto(Long idProducto);
 
 }
