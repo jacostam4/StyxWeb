@@ -46,7 +46,7 @@ public class SecurityConfig {
         @Override
         public void addCorsMappings(CorsRegistry registry) {
             registry.addMapping("/**")
-                    .allowedOrigins("http://localhost:54173") // URL de tu cliente
+                    .allowedOrigins("http://localhost:54870") // URL de tu cliente
                     .allowedMethods("GET", "POST", "PUT", "DELETE")
                     .allowedHeaders("*");
         }
