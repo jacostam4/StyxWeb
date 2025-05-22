@@ -10,6 +10,9 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+
 
 
 
@@ -27,5 +30,11 @@ public class TallaController {
     public ResponseEntity<List<TallaModel>> getAllTallas() {
         return ResponseEntity.ok(tallaService.getAllTallas());
     }
+
+    @GetMapping("/search/{id}")
+    public ResponseEntity<TallaModel> getTallaById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(tallaService.getTallaById(id));
+    }
+    
     
 }

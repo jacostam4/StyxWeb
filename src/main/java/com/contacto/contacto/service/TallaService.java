@@ -20,4 +20,9 @@ public class TallaService {
     public List<TallaModel> getAllTallas() {
         return tallaRepository.findAll();
     }
+
+    //obtener talla por id
+    public TallaModel getTallaById(Long id) {
+        return tallaRepository.findByIdTalla(id).orElse(null);
+    }
 }
