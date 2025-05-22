@@ -23,6 +23,9 @@ public class InventarioModel {
     @Column(name = "id_almacen", nullable = false)
     private long idAlmacen;
 
+    @Column(name = "id_talla", nullable = false)
+    private long idTalla;
+
     @Column(nullable = false)
     private long cantidad;
 
