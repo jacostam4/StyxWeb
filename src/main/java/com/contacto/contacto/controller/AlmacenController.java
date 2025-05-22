@@ -9,11 +9,12 @@ import com.contacto.contacto.service.AlmacenService;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/almacen")
 public class AlmacenController {
