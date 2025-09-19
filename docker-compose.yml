@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:16
+    container_name: styx_db
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_DB: ${DB_NAME:-styxbd}
+      TZ: ${TZ:-America/Bogota}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-styxbd}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: styx_app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-styxbd}
+      DB_USER: ${DB_USER:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      PORT: 8074
+      TZ: ${TZ:-America/Bogota}
+    ports:
+      - "8074:8074"
+
+volumes:
+  pgdata:
