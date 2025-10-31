@@ -25,6 +25,11 @@ public class ProductoService {
         return productoRepository.findAll();
     }
 
+    // Obtener productos por categoría (NUEVO)
+    public List<ProductoModel> getByCategoria(Long idCategoria) {
+        return productoRepository.findAllByIdCategoria(idCategoria);
+    }
+
     //actualizar productos
     public ProductoModel updateProducto (Long id, ProductoModel producto) {
         return productoRepository.findById(id).map(existeProducto -> {

@@ -65,4 +65,9 @@ public class InventarioService {
             throw new RuntimeException("Inventario no encontrado");
         }
     }
+
+    public List<InventarioModel> buscar(Long productoId, Long tallaId, Long categoriaId) {
+        return inventarioRepository.buscarPorFiltros(productoId, tallaId, categoriaId);
+    }
+
 }

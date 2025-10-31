@@ -7,6 +7,8 @@ services:
       POSTGRES_USER: ${DB_USER:-postgres}
       POSTGRES_DB: ${DB_NAME:-styxbd}
       TZ: ${TZ:-America/Bogota}
+    ports:
+      - "5433:5432"  # <— expone 5433 en el host
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
