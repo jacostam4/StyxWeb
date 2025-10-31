@@ -55,4 +55,14 @@ public class InventarioController {
         inventarioService.deleteInventario(id);
         return ResponseEntity.ok("Inventario eliminado correctamente");
     }
+
+    @GetMapping("/buscar")
+public ResponseEntity<List<InventarioModel>> buscar(
+        @RequestParam(value = "productoId", required = false) Long productoId,
+        @RequestParam(value = "tallaId", required = false) Long tallaId,
+        @RequestParam(value = "categoriaId", required = false) Long categoriaId
+) {
+    List<InventarioModel> resultado = inventarioService.buscar(productoId, tallaId, categoriaId);
+    return ResponseEntity.ok(resultado);
+}
 }

@@ -51,5 +51,11 @@ public class ProductoController {
     public ResponseEntity<ProductoModel> getProductoById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(productoService.getProductoById(id));
     }
+
+    @GetMapping("/categoria/{idCategoria}")
+    public ResponseEntity<List<ProductoModel>> getByCategoria(@PathVariable("idCategoria") Long idCategoria) {
+        List<ProductoModel> productos = productoService.getByCategoria(idCategoria);
+        return ResponseEntity.ok(productos); // [] si no hay resultados
+    }
     
 }

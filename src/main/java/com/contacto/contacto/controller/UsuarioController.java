@@ -66,20 +66,22 @@ public class UsuarioController {
 
     @GetMapping("/me")
     public ResponseEntity<?> getCurrentUser(@RequestHeader("Authorization") String authHeader) {
-    try {
-        String token = authHeader.replace("Bearer ", "");
-        Claims claims = jwtUtil.parseToken(token);
+        try {
+            String token = authHeader.replace("Bearer ", "");
+            Claims claims = jwtUtil.parseToken(token);
 
-        Map<String, Object> userInfo = new HashMap<>();
-        userInfo.put("idUsuario", claims.get("idUsuario", Integer.class));
-        userInfo.put("nombre", claims.get("nombre", String.class));
-        userInfo.put("correo", claims.getSubject()); // correo
-        userInfo.put("rol", claims.get("rol", Integer.class)); // o String si usas nombre
+            Map<String, Object> userInfo = new HashMap<>();
+            userInfo.put("idUsuario", claims.get("idUsuario", Integer.class));
+            userInfo.put("nombre", claims.get("nombre", String.class));
+            userInfo.put("correo", claims.getSubject()); // correo
+            userInfo.put("rol", claims.get("rol", Integer.class)); // o String si usas nombre
 
-        return ResponseEntity.ok(userInfo);
-    } catch (Exception e) {
-        return ResponseEntity.status(401).body("Token inválido o expirado");
+            return ResponseEntity.ok(userInfo);
+        } catch (Exception e) {
+            return ResponseEntity.status(401).body("Token inválido o expirado");
+        }
     }
-}
+
+    
     
 }

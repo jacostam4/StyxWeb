@@ -1,6 +1,7 @@
 package com.contacto.contacto.model;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +19,8 @@ public class ProductoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id_producto;
 
-    private long id_categoria;
+    @Column(name = "id_categoria")
+    private long idCategoria;
 
     private String nombre;
     private float costo;

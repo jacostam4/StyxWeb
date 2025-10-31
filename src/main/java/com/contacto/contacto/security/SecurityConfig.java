@@ -26,7 +26,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/usuario/auth", "/api/usuario/register", "/images/**", "/Imagenes/**").permitAll()
+                .requestMatchers("/api/usuario/auth", "/api/usuario/register", "/api/producto/all" ,"/images/**", "/Imagenes/**").permitAll()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
@@ -46,7 +46,7 @@ public class SecurityConfig {
         @Override
         public void addCorsMappings(CorsRegistry registry) {
             registry.addMapping("/**")
-                    .allowedOrigins("http://localhost:54870") // URL de tu cliente
+                    .allowedOrigins("http://localhost:5173") // URL de tu cliente
                     .allowedMethods("GET", "POST", "PUT", "DELETE")
                     .allowedHeaders("*");
         }
